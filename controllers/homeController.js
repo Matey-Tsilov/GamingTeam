@@ -43,7 +43,6 @@ router.get("/edit/:id", isAuth, async (req, res) => {
 router.put("/edit/:id", isAuth, async (req, res) => {
   const newGame = req.body;
   const id = req.params.id;
-  console.log(id);
 
   await gameService.edit(id, newGame);
   res.redirect(`/catalog/${id}`);
