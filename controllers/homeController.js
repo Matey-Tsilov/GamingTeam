@@ -1,0 +1,64 @@
+const router = require("express").Router();
+const { auth, isAuth } = require("../middlewares/authMiddleware");
+const gameService = require("../services/gameService");
+
+router.get("/", (req, res) => {
+  res.render("home");
+});
+
+router.get("/catalog/:id", async (req, res) => {
+  const curGame = await gameService.getById(req.params.id);
+
+    curGame.isGuest = req.user == undefined
+    curGame.isOwner = req.user && curGame.owner == req.user._id;
+    curGame.hasBought = !curGame.isOwner && curGame.boughtBy?.includes(req.user?._id);
+  console.log(curGame);
+  
+
+  res.render("details", curGame);
+}); 
+
+router.get("/catalog", async (req, res) => {
+  const games = await gameService.getAll();
+
+  res.render("catalog", { games });
+});
+
+router.get("/create", (req, res) => {
+  res.render("create");
+});
+
+router.post("/create", isAuth, async (req, res) => {
+  const game = req.body;
+  await gameService.create(game, req.user._id);
+
+  res.redirect("/catalog");
+});
+
+router.get("/edit/:id", async (req, res) => {
+  const curGame = await gameService.getById(req.params.id);
+  res.render("edit", curGame);
+});
+
+router.put("/edit/:id", isAuth, async (req, res) => {
+  const newGame = req.body;
+  console.log(newGame);
+  const id = req.params.id;
+  console.log(id);
+
+  await gameService.edit(id, newGame);
+  res.redirect(`/catalog/${id}`);
+});
+
+router.get("/delete/:id", isAuth, async (req, res) => {
+  await gameService.delete(req.params.id);
+  res.redirect("/catalog");
+});
+
+router.get("/buy/:id", isAuth, async (req, res) => {
+  const curGame = await gameService.getById(req.params.id);
+  curGame.boughtBy.push(req.user._id);
+  res.redirect(`/catalog/${req.params.id}`);
+});
+
+module.exports = router;
