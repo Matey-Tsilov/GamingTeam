@@ -24,7 +24,7 @@ router.get("/catalog", async (req, res) => {
   res.render("catalog", { games });
 });
 
-router.get("/create", (req, res) => {
+router.get("/create", isAuth, (req, res) => {
   res.render("create");
 });
 
@@ -35,14 +35,13 @@ router.post("/create", isAuth, async (req, res) => {
   res.redirect("/catalog");
 });
 
-router.get("/edit/:id", async (req, res) => {
+router.get("/edit/:id", isAuth, async (req, res) => {
   const curGame = await gameService.getById(req.params.id);
   res.render("edit", curGame);
 });
 
 router.put("/edit/:id", isAuth, async (req, res) => {
   const newGame = req.body;
-  console.log(newGame);
   const id = req.params.id;
   console.log(id);
 
