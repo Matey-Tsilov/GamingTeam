@@ -12,7 +12,6 @@ router.get("/catalog/:id", async (req, res) => {
     curGame.isGuest = req.user == undefined
     curGame.isOwner = req.user && curGame.owner == req.user._id;
     curGame.hasBought = !curGame.isOwner && curGame.boughtBy?.includes(req.user?._id);
-  console.log(curGame);
   
 
   res.render("details", curGame);
@@ -40,8 +39,10 @@ router.get("/edit/:id", isAuth, async (req, res) => {
   res.render("edit", curGame);
 });
 
-router.put("/edit/:id", isAuth, async (req, res) => {
+router.post("/edit/:id", isAuth, async (req, res) => {
   const newGame = req.body;
+  console.log(newGame);
+  //то не влиза в самия action!
   const id = req.params.id;
 
   await gameService.edit(id, newGame);

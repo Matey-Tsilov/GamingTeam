@@ -11,4 +11,7 @@ exports.getById = (id) => Game.findById(id).lean();
 
 exports.delete = (id) => Game.findByIdAndRemove(id);
 
-exports.edit = (id, game) => Game.findByIdAndUpdate(id, Object.assign({}, game));
+exports.edit = async (id, game) => { 
+  const curRecord = await Game.findById(id)
+  Game.updateOne({_id: curRecord._id}, {...game})
+}
