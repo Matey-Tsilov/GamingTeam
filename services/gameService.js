@@ -11,6 +11,6 @@ exports.getById = (id) => Game.findById(id).lean();
 
 exports.delete = (id) => Game.findByIdAndRemove(id);
 
-exports.edit = async (id, game) => { 
-  await Game.findByIdAndUpdate(id, game)
-}
+exports.edit = (id, game) => Game.findByIdAndUpdate(id, game)
+
+exports.buy = (id, game) => Game.findByIdAndUpdate(id, game)
