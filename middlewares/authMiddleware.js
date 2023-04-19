@@ -29,4 +29,4 @@ exports.isAuth = (req, res, next) => {
         return res.render('404')
     }
     next()
-}
+};
