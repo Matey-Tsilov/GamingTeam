@@ -79,5 +79,8 @@ router.get("/buy/:id", isAuth, async (req, res) => {
     res.render("404", error);
   }
 });
+router.get('/search', isAuth, (req, res) => {
+    res.render('search')
+})
 
 module.exports = router;
