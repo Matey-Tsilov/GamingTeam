@@ -9,7 +9,7 @@
 #home {
   width: 100%;
   height: 100vh;
-  background-image: url(../images/background.jpg);
+  background-image: url(../images/background3.jpg);
   background-position: center;
   background-size: cover;
   padding-top: 120px;
@@ -50,10 +50,12 @@ nav ul li a {
 .content h1 {
   font-size: 88px;
   margin-bottom: 15px;
+  color: #fbb13c;
+
 }
 
 .content h1 span {
-  color: #096BAB;
+  color: #d81159;
 }
 
 .content p {
@@ -62,13 +64,13 @@ nav ul li a {
 }
 
 .content strong {
-    color: #2E87CB
+    color: #d81159;
 }
 
 .content .buy {
   display: inline-block;
   margin-top: 30px;
-  background: #2E87CB;
+  background: #d81159;
   color: #fff;
   text-decoration: none;
   padding: 15px 50px;
