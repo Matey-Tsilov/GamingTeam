@@ -1,4 +1,4 @@
 # GamingTeam 
-- This is a ordinary game online shop.
-I was allready almost finished with the whole functionality before commiting it to github. All that is left to do is implement the logic for the boughtBy array from Objectid's in the database model, and the edit functionality.
-I can also make a search input.
+
+## Application overwiev
+- The visitors can view the home page and All Games Code catalog with the available offers. They can also register with an email, username, and password, which will allow them to create their offers for game code and buy games (if the current user is not the owner of the game). Authors can edit or delete posts at any time.
