@@ -76,17 +76,6 @@ nav ul li a {
   font-size: 20px;
 }
 
-footer p {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: #050912;
-  color: white;
-  font-weight: bolder;
-  text-align: center;
-}
-
 ::-webkit-scrollbar {
     width: 10px;
 }
