@@ -8,13 +8,17 @@ router.get("/login", (req, res) => {
 router.post("/login", async (req, res) => {
     const { email, password } = req.body;
   
-    try {
-      const user = await authService.login(email, password);
-      const token = await authService.generateToken(user);
-      res.cookie(COOKIE_SESSION_NAME, token, {httpOnly: true});
-      res.redirect("/");
-    } catch (error) {
-      res.render("login", { error: error.message });
+    if (password != '' && email != '') {
+      try {
+        const user = await authService.login(email, password);
+        const token = await authService.generateToken(user);
+        res.cookie(COOKIE_SESSION_NAME, token, {httpOnly: true});
+        res.redirect("/");
+      } catch (error) {
+        res.render("login", { error: error.message });
+      }
+    }else{
+      res.render('login', {error: 'Email and passwrod inputs are mandatory!'})
     }
   });
 

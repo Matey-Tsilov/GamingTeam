@@ -5,10 +5,12 @@ const gameService = require("../services/gameService");
 router.get("/", (req, res) => {
   res.render("home");
 });
+
 router.get("/catalog", async (req, res) => {
   try {
     const games = await gameService.getAll();
-    res.render("catalog", { games });
+    res.render("catalog", {games});
+    
   } catch (error) {
     res.render("404", error);
   }
@@ -28,6 +30,7 @@ router.get("/catalog/:id", async (req, res) => {
     res.render("404", error);
   }
 });
+
 router.get("/create", isAuth, (req, res) => {
   res.render("create");
 });
@@ -41,6 +44,7 @@ router.post("/create", isAuth, async (req, res) => {
     res.render("404", error);
   }
 });
+
 router.get("/edit/:id", isAuth, async (req, res) => {
   try {
     const curGame = await gameService.getById(req.params.id);
@@ -60,6 +64,7 @@ router.post("/edit/:id", isAuth, async (req, res) => {
     res.render("404", error);
   }
 });
+
 router.get("/delete/:id", isAuth, async (req, res) => {
   try {
     await gameService.delete(req.params.id);
@@ -68,6 +73,7 @@ router.get("/delete/:id", isAuth, async (req, res) => {
     res.render("404", error);
   }
 });
+
 router.get("/buy/:id", isAuth, async (req, res) => {
   try {
     const curGame = await gameService.getById(req.params.id);
@@ -79,8 +85,21 @@ router.get("/buy/:id", isAuth, async (req, res) => {
     res.render("404", error);
   }
 });
-router.get('/search', isAuth, (req, res) => {
-    res.render('search')
+
+router.all('/search', isAuth, async (req, res) => {
+  try {
+    const games = await gameService.getAll();
+    const query = req.body
+    
+    if (Object.values(query).some(x => x != '')) {
+
+      
+    }
+    res.render("search", {games});
+
+  } catch (error) {
+    res.render("404", error);
+  }
 })
 
 module.exports = router;
