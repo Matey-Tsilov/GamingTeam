@@ -12,7 +12,7 @@
   width: 360px;
   height: 330px;
   margin: auto;
-  background-color: #096BAB;
+  background: rgba(11, 12, 11, 0.8);
   border: 2px solid #2e87cb;
   border-radius: 20px;
   margin-top: 5%;
@@ -49,6 +49,7 @@ form input {
   border-radius: 8px;
   outline: none;
   color: black;
+  background-color: wheat;
 
 }
 
@@ -60,6 +61,7 @@ input[type="submit"] {
   background-color: #050912;
   color: white;
   font-size: 15px;
+  border: 1px solid wheat;
 }
 
 .login-box p {
@@ -69,5 +71,5 @@ input[type="submit"] {
 }
 
 .login-box p > a {
-  color: #050912;
+  color: wheat
 }

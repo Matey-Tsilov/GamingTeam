@@ -12,7 +12,7 @@
     width: 360px;
     height: 500px;
     margin: auto;
-    background-color: #096BAB;
+  background: rgba(11, 12, 11, 0.8);
     border: 2px solid #2E87CB;
     border-radius: 20px;
     margin-top: 2%;
@@ -49,13 +49,14 @@
     border-radius: 8px;
     outline: none;
     color: black;
+    background-color: wheat;
 }
 
 .register-box input[type="submit"] {
     width: 320px;
     height: 35px;
     margin-top: 30px;
-    border: none;
+    border: 1px solid wheat;
     background-color: #050912;
     color: white;
     font-size: 15px;
@@ -69,5 +70,5 @@
 }
 
 .register-box p>a {
-    color: #050912;
+    color: wheat
 }
