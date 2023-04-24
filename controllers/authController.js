@@ -31,13 +31,8 @@ router.post("/register", async (req, res) => {
 
   if (password !== rePass) {
     return res.render("register", { error: "Passwords mismatch!" });
-  } else if (username.length < 5) {
-    return res.render("register", {error: "The username should be at least five characters long."})
-  } else if (email.length < 10) {
-    return res.render("register", {error: "The email should be at least ten character long."})
-  } else if (password.length < 4) {
-    return res.render("register", {error: "The password should be at least four characters long."})
-  } else {
+  } 
+  
     try {
       const user = await authService.create({ username, email, password });
       const token = await authService.generateToken(user);
@@ -47,7 +42,7 @@ router.post("/register", async (req, res) => {
       res.render("register", { error: error.message });
     }
   }
-});
+);
 
 router.get("/logout", (req, res) => {
   res.clearCookie(COOKIE_SESSION_NAME);
