@@ -3,6 +3,7 @@ const hbs = require('express-handlebars')
 const routes = require('./routes')
 const {PORT} = require('./constants')
 const cookieParser = require('cookie-parser')
+
 const server = express()
 const {auth} = require('./middlewares/authMiddleware')
 
