@@ -32,13 +32,16 @@ router.post("/register", async (req, res) => {
   if (password !== rePass) {
     return res.render("register", { error: "Passwords mismatch!" });
   } 
-  
+
     try {
       const user = await authService.create({ username, email, password });
       const token = await authService.generateToken(user);
       res.cookie(COOKIE_SESSION_NAME, token, { httpOnly: true });
       res.redirect("/");
     } catch (error) {
+     const errors = Object.values(error.errors).map(x => x.message)
+      
+      
       res.render("register", { error: error.message });
     }
   }
