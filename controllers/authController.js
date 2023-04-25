@@ -40,9 +40,7 @@ router.post("/register", async (req, res) => {
       res.redirect("/");
     } catch (error) {
      const errors = Object.values(error.errors).map(x => x.message)
-      
-      
-      res.render("register", { error: error.message });
+     res.render("register", { error: errors[0] });
     }
   }
 );
