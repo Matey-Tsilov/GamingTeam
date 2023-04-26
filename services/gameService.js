@@ -1,8 +1,8 @@
 const Game = require("../models/Game");
 
-exports.create = async (data, ownerId) => {
+exports.create = (data, ownerId) => {
   data.owner = ownerId;
-  await Game.create(data);
+  return Game.create(data);
 };
 
 exports.getAll = () => Game.find().lean();
