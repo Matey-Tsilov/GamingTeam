@@ -1,7 +1,10 @@
 const express = require('express')
 const hbs = require('express-handlebars')
 const routes = require('./routes')
-const {PORT} = require('./constants')
+
+const PORT = process.env.PORT
+
+
 const cookieParser = require('cookie-parser')
 
 const server = express()
