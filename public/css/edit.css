@@ -12,8 +12,8 @@
   width: 360px;
   height: auto;
   margin: auto;
-  background-color: #096BAB;
-  border: 2px solid #2e87cb;
+  background: rgba(11, 12, 11, 0.8);
+  border: 2px solid #b62ea0;
   border-radius: 20px;
   margin-top: 1%;
 }
@@ -21,7 +21,7 @@
 #edit-container h1 {
   text-align: center;
   padding-top: 15px;
-  color: #050912;
+  color: wheat
 }
 
 #edit-container form {
@@ -44,8 +44,7 @@
   border: 1px solid gray;
   border-radius: 8px;
   outline: none;
-  background-color: whitesmoke;
-  color: black;
+  background-color: wheat
 }
 
 #edit-container input::-webkit-inner-spin-button {
@@ -55,6 +54,7 @@
 
 #edit-container input[type="number"] {
   -moz-appearance: textfield;
+  background-color: wheat;
 }
 
 #edit-container form textarea {
@@ -65,7 +65,7 @@
   border: 1px solid gray;
   border-radius: 8px;
   outline: none;
-  background-color: whitesmoke;
+  background-color: wheat;
   resize: none;
   color: black;
 }
@@ -81,7 +81,7 @@
   font-weight: bold;
   border-radius: 20px;
   width: 320px;
-  background-color: whitesmoke;
+  background-color: wheat;
   color: #050912;
 }
 
@@ -99,4 +99,6 @@
   color: white;
   font-size: 15px;
   margin-bottom: 30px;
+  border: 1px solid wheat;
+
 }

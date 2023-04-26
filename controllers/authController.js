@@ -28,8 +28,6 @@ router.get("/register", (req, res) => {
 
 router.post("/register", async (req, res) => {
   const { username, email, password, rePass } = req.body;
-  console.log(req.body);
-  
 
   if (password !== rePass) {
     return res.render("register", { error: "Passwords mismatch!" });
@@ -45,8 +43,6 @@ router.post("/register", async (req, res) => {
       res.render("register", { error: errors[0] });
     }
     error.message = 'This email already exists!'
-    console.log(error);
-    
     res.render("register", {error: error.message});
   }
 });
