@@ -9,7 +9,6 @@ router.get("/", (req, res) => {
 router.get("/catalog", async (req, res) => {
   try {
     const games = await gameService.getAll();
-    console.log(games);
     
     res.render("catalog", {games});
     
@@ -105,8 +104,6 @@ router.all('/search', isAuth, async (req, res) => {
     }
     res.render("search", {games});
   } catch (error) {
-    console.log(error);
-    
     res.render("404", error);
   }
 })
