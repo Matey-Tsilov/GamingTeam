@@ -9,6 +9,8 @@ router.get("/", (req, res) => {
 router.get("/catalog", async (req, res) => {
   try {
     const games = await gameService.getAll();
+    console.log(games);
+    
     res.render("catalog", {games});
     
   } catch (error) {
@@ -38,9 +40,11 @@ router.post("/create", isAuth, async (req, res) => {
   try {
     const game = req.body;
     await gameService.create(game, req.user._id);
-
+// console.log(Object.values(res.errors).map(x => x.message));
     res.redirect("/catalog");
   } catch (error) {
+    console.log('#################################################################', error);
+    
     res.render("404", error);
   }
 });
@@ -61,7 +65,8 @@ router.post("/edit/:id", isAuth, async (req, res) => {
     await gameService.edit(id, newGame);
     res.redirect(`/catalog/${id}`);
   } catch (error) {
-    res.render("404", error);
+    const errors = Object.values(error.errors).map(x => x.message)
+    res.render("404", {error: errors[0]});
   }
 });
 

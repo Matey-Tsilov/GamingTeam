@@ -32,7 +32,6 @@ router.post("/register", async (req, res) => {
   if (password !== rePass) {
     return res.render("register", { error: "Passwords mismatch!" });
   } 
-
     try {
       const user = await authService.create({ username, email, password });
       const token = await authService.generateToken(user);
