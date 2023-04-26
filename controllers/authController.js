@@ -40,13 +40,14 @@ router.post("/register", async (req, res) => {
     res.cookie(COOKIE_SESSION_NAME, token, { httpOnly: true });
     res.redirect("/");
   } catch (error) {
-    if (error.errors) {
+    if (error.code !== 11000) {
       const errors = Object.values(error.errors).map((x) => x.message);
       res.render("register", { error: errors[0] });
     }
+    error.message = 'This email already exists!'
+    console.log(error);
+    
     res.render("register", {error: error.message});
-
-
   }
 });
 
