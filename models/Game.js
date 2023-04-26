@@ -31,7 +31,6 @@ const gameSchema = new mongoose.Schema({
     },
     platform: {
         type: String,
-        // enum: {values: ["PC", "Nintendo", "PS4", "PS5", "XBOX"], message: "There is no such thing like {VALUE}"}
         enum: ["PC", "Nintendo", "PS4", "PS5", "XBOX"]
     },
     boughtBy: [{
