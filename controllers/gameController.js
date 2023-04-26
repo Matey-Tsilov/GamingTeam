@@ -39,13 +39,13 @@ router.get("/create", isAuth, (req, res) => {
 router.post("/create", isAuth, async (req, res) => {
   try {
     const game = req.body;
+
     await gameService.create(game, req.user._id);
-// console.log(Object.values(res.errors).map(x => x.message));
     res.redirect("/catalog");
   } catch (error) {
-    console.log('#################################################################', error);
     
-    res.render("404", error);
+    const errors = Object.values(error.errors).map(x => x.message)
+    res.render("create", {error: errors[0]});
   }
 });
 
