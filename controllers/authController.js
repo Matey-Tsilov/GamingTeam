@@ -28,21 +28,27 @@ router.get("/register", (req, res) => {
 
 router.post("/register", async (req, res) => {
   const { username, email, password, rePass } = req.body;
+  console.log(req.body);
+  
 
   if (password !== rePass) {
     return res.render("register", { error: "Passwords mismatch!" });
-  } 
-    try {
-      const user = await authService.create({ username, email, password });
-      const token = await authService.generateToken(user);
-      res.cookie(COOKIE_SESSION_NAME, token, { httpOnly: true });
-      res.redirect("/");
-    } catch (error) {
-     const errors = Object.values(error.errors).map(x => x.message)
-     res.render("register", { error: errors[0] });
-    }
   }
-);
+  try {
+    const user = await authService.create({ username, email, password });
+    const token = await authService.generateToken(user);
+    res.cookie(COOKIE_SESSION_NAME, token, { httpOnly: true });
+    res.redirect("/");
+  } catch (error) {
+    if (error.errors) {
+      const errors = Object.values(error.errors).map((x) => x.message);
+      res.render("register", { error: errors[0] });
+    }
+    res.render("register", {error: error.message});
+
+
+  }
+});
 
 router.get("/logout", (req, res) => {
   res.clearCookie(COOKIE_SESSION_NAME);

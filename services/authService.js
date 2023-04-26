@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { SECRET } = require("../constants");
 
-exports.create = (userData) => User.create(userData);
+exports.create = async (userData) => User.create(userData);
 //ще работи само ако username е уникално!
 exports.login = async (email, password) => {
   const user = await User.findOne({ email });
