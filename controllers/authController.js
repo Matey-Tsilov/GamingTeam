@@ -5,6 +5,7 @@ const { COOKIE_SESSION_NAME } = require("../constants.js");
 router.get("/login", (req, res) => {
   res.render("login");
 });
+
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
