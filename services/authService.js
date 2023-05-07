@@ -9,13 +9,13 @@ exports.login = async (email, password) => {
   const user = await User.findOne({ email });
 
   if (!user) {
-    throw { message: "Cannot find username or password!" };
+    throw { message: "Cannot find email or password!" };
   }
 
-  const isValid = bcrypt.compare(password, user.password);
+  const isSame = await bcrypt.compare(password, user.password);
 
-  if (!isValid) {
-    throw { message: "Cannot find username or password!" };
+  if (!isSame) {
+    throw { message: "Cannot find email or password!" };
   }
   return user
 };

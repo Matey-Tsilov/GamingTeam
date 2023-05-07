@@ -11,6 +11,6 @@ exports.getById = (id) => Game.findById(id).lean();
 
 exports.delete = (id) => Game.findByIdAndRemove(id);
 
-exports.edit = (id, game) => Game.findByIdAndUpdate(id, game)
+exports.edit = (id, game) => Game.findByIdAndUpdate(id, game, {runValidators: true} )
 
 exports.buy = (id, game) => Game.findByIdAndUpdate(id, game)
