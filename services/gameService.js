@@ -5,7 +5,16 @@ exports.create = (data, ownerId) => {
   return Game.create(data);
 };
 
-exports.getAll = () => Game.find().lean();
+exports.getAll = (query = '') => {
+ 
+  return Game.find(
+    {
+      name: {$regex: new RegExp(query?.name, 'i')},
+      platform: {$regex: new RegExp(query?.name, 'i')}
+    })
+    .lean()
+
+};
 
 exports.getById = (id) => Game.findById(id).lean();
 

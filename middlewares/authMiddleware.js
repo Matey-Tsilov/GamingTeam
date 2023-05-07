@@ -14,7 +14,6 @@ exports.auth = (req, res, next) => {
       }
 
       req.user = decodedToken;
-      
       //за да може да го имаме при темплейтинга!
       res.locals.user = decodedToken;
       
@@ -25,6 +24,7 @@ exports.auth = (req, res, next) => {
   }
 };
 
+//isUser
 exports.isAuth = (req, res, next) => {
     if (!req.user) {
         return res.render('404')

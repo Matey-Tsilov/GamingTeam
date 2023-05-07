@@ -92,16 +92,9 @@ router.get("/buy/:id", isAuth, async (req, res) => {
 
 router.all('/search', isAuth, async (req, res) => {
   try {
-    let games = await gameService.getAll();
-    const query = Object.values(req.body).filter(x => x != '')
-    
-    if (query.length == 2) {
-      //ако имаш 2 параметъра, тогава първия(name) ще е на 0 индекс а втория (platform) щe e na 1
-       games = games.filter(x => x.name.toLowerCase().includes(query[0].toLowerCase()) && x.platform == query[1])
-    }else if(query.length == 1) {
-      //ако имаш само един параметър той винаги ще е на нулева позиция, независимо дали ще е "name" или "platform"
-      games = games.filter(x => x.name.toLowerCase().includes(query[0].toLowerCase()) || x.platform == query[0])
-    }
+    const query = {...req.body}
+    const games = await gameService.getAll(query)
+
     res.render("search", {games});
   } catch (error) {
     res.render("404", error);
