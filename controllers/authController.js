@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const authService = require("../services/authService");
 const { COOKIE_SESSION_NAME } = require("../constants.js");
+const {body} = require('express-validator')
 
 router.get("/login", (req, res) => {
   res.render("login");
@@ -23,8 +24,12 @@ router.get("/register", (req, res) => {
   res.render("register");
 });
 
-router.post("/register", async (req, res) => {
+router.post("/register", 
+body('email', 'Email should be normal!').normalizeEmail(),
+ async (req, res) => {
   const { username, email, password, rePass } = req.body;
+console.log(email);
+
 
   if (password !== rePass) {
     return res.render("register", { error: "Passwords mismatch!" });
