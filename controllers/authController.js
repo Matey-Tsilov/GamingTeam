@@ -40,7 +40,7 @@ router.post("/register", async (req, res) => {
     if (error.code == 11000) {
       error.message = 'This email already exists!'
     }
-    
+
     res.render("register", {error: error.message});
   }
 });
