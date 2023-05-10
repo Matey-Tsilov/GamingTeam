@@ -13,7 +13,7 @@ router.get("/catalog", async (req, res) => {
     res.render("catalog", {games});
     
   } catch (error) {
-    res.render("404", error);
+    res.render("404", {error: error.message});
   }
 });
 router.get("/catalog/:id", async (req, res) => {
@@ -28,7 +28,8 @@ router.get("/catalog/:id", async (req, res) => {
 
     res.render("details", curGame);
   } catch (error) {
-    res.render("404", error);
+
+    res.render("404", {error: error.message});
   }
 });
 
@@ -74,7 +75,7 @@ router.get("/delete/:id", isAuth, async (req, res) => {
     await gameService.delete(req.params.id);
     res.redirect("/catalog");
   } catch (error) {
-    res.render("404", error);
+    res.render("404", {error: error.message});
   }
 });
 
@@ -86,7 +87,7 @@ router.get("/buy/:id", isAuth, async (req, res) => {
     await gameService.edit(curGame._id, curGame);
     res.redirect(`/catalog/${req.params.id}`);
   } catch (error) {
-    res.render("404", error);
+    res.render("404", {error: error.message});
   }
 });
 
@@ -97,7 +98,7 @@ router.all('/search', isAuth, async (req, res) => {
 
     res.render("search", {games});
   } catch (error) {
-    res.render("404", error);
+    res.render("404", {error: error.message});
   }
 })
 
