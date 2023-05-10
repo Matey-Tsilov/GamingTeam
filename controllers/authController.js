@@ -9,7 +9,6 @@ router.get("/login", (req, res) => {
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
-  if (password != "" && email != "") {
     try {
       const user = await authService.login(email, password);
       const token = await authService.generateToken(user);
@@ -18,9 +17,6 @@ router.post("/login", async (req, res) => {
     } catch (error) {
       res.render("login", { error: error.message });
     }
-  } else {
-    res.render("login", { error: "Email and passwrod inputs are mandatory!" });
-  }
 });
 
 router.get("/register", (req, res) => {
@@ -33,17 +29,18 @@ router.post("/register", async (req, res) => {
   if (password !== rePass) {
     return res.render("register", { error: "Passwords mismatch!" });
   }
+
   try {
     const user = await authService.create({ username, email, password });
     const token = await authService.generateToken(user);
     res.cookie(COOKIE_SESSION_NAME, token, { httpOnly: true });
     res.redirect("/");
   } catch (error) {
-    if (error.code !== 11000) {
-      const errors = Object.values(error.errors).map((x) => x.message);
-      res.render("register", { error: errors[0] });
+
+    if (error.code == 11000) {
+      error.message = 'This email already exists!'
     }
-    error.message = 'This email already exists!'
+    
     res.render("register", {error: error.message});
   }
 });

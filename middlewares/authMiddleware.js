@@ -7,6 +7,7 @@ exports.auth = (req, res, next) => {
 
   if (token) {
     //така потвърждаваме че никой не е пипал тяо токен, че това е официално издаденият токен!
+    //Тъй като тва не е promise func може да разчитаме че callbacka ще си свърши работата! Няма нужда да го промисифайваме
     jwt.verify(token, SECRET, (err, decodedToken) => {
       if (err) {
         res.clearCookie(COOKIE_SESSION_NAME);
