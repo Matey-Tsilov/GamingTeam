@@ -28,8 +28,6 @@ router.post("/register",
 body('email', 'Email should be normal!').normalizeEmail(),
  async (req, res) => {
   const { username, email, password, rePass } = req.body;
-console.log(email);
-
 
   if (password !== rePass) {
     return res.render("register", { error: "Passwords mismatch!" });
